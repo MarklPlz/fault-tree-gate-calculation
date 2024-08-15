@@ -2,16 +2,20 @@ import math
 
 # class for events of repairable systems
 class Event:
-    def __init__(self, name="event", fr=0, mttr=0, q=0, w=0, t_sys=1):
-        self.name = name
-        self.fr = fr
-        self.mttr = mttr
-        if self.fr and self.mttr:
-            self.q = ((fr)/(fr+1/mttr)*(1-math.exp(-(fr+1/mttr)*t_sys)))
-            self.w = (1 - self.q)*fr
+    def __init__(self, name="Event", fr=0, mttr=0, rr=0, q=0, w=0, t=1):
+        self.name = name    # event name
+        self.fr = fr        # failure rate
+        self.mttr = mttr    # mean time to repair
+        if mttr:
+            self.rr = 1/mttr
         else:
-            self.q = q
-            self.w = w
+            self.rr = rr    # repair rate
+        if q and w:
+            self.q = q      # unavailability
+            self.w = w      # failure frequency
+        else:
+            self.q = (fr)/(fr+self.rr)*(1-math.exp(-(fr+self.rr)*t))
+            self.w = (1-self.q)*fr
     
     def print_stats(self):
         print(self.name)
@@ -19,6 +23,9 @@ class Event:
         if self.fr and self.mttr:
             print("FR   =", format(self.fr, '.2e'))
             print("MTTR =", self.mttr)
+        if self.fr and not self.rr:
+            print("FR   =", format(self.fr, '.2e'))
+            print("RR   =", format(self.fr, '.2e'))
         print("w    =", format(self.w, '.2e'))
         print("Q    =", format(self.q, '.2e'))
         print()
@@ -68,13 +75,11 @@ def main():
         t_sys = 24 * 365 * 10   # 10 years
 
         # Basis events
-        BE1 = Event(name="Basis event 1", fr=0.2e-09, mttr=12, t_sys=t_sys)
-        BE2 = Event(name="Basis event 2", fr=0.11e-09, mttr=20, t_sys=t_sys)
-        BE3 = Event(name="Basis event 3", fr=0.9e-09, mttr=1, t_sys=t_sys)
-        BE4 = Event(name="Basis event 4", fr=0.55e-09, mttr=2, t_sys=t_sys)
+        BE1 = Event(name="Basis event 1", fr=0.2e-09, mttr=12, t=t_sys)
+        BE2 = Event(name="Basis event 2", fr=0.11e-09, mttr=20, t=t_sys)
+        BE3 = Event(name="Basis event 3", fr=0.9e-09, mttr=1, t=t_sys)
+        BE4 = Event(name="Basis event 4", fr=0.55e-09, mttr=2, t=t_sys)
 
-        print("Basis events")
-        print("###############")
         BE1.print_stats()
         BE2.print_stats()
         BE3.print_stats()

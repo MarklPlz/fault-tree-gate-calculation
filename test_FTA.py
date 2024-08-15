@@ -1,26 +1,25 @@
 import FTA
         
 # Test data / Basis events
-E01 = FTA.Event(fr=0.23e-09, mttr=12, t_sys=1)
-E02 = FTA.Event(fr=0.11e-09, mttr=20, t_sys=1)
-E03 = FTA.Event(fr=0.91e-09, mttr=1, t_sys=1)
-E04 = FTA.Event(fr=0.55e-09, mttr=2, t_sys=1)
-E05 = FTA.Event(fr=0.83, mttr=56, t_sys=1)
-E06 = FTA.Event(fr=0.77, mttr=11, t_sys=1)
-E07 = FTA.Event(fr=0.12, mttr=96, t_sys=1)
-E08 = FTA.Event(fr=0.67, mttr=67, t_sys=1)
-E09 = FTA.Event(fr=0.23e-09, mttr=12, t_sys=87600)
-E10 = FTA.Event(fr=0.11e-09, mttr=20, t_sys=87600)
-E11 = FTA.Event(fr=0.91e-09, mttr=1, t_sys=87600)
-E12 = FTA.Event(fr=0.55e-09, mttr=2, t_sys=87600)
-E13 = FTA.Event(fr=0.83, mttr=56, t_sys=87600)
-E14 = FTA.Event(fr=0.77, mttr=11, t_sys=87600)
-E15 = FTA.Event(fr=0.12, mttr=96, t_sys=87600)
-E16 = FTA.Event(fr=0.67, mttr=67, t_sys=87600)
+E01 = FTA.Event(fr=0.23e-09, mttr=12, t=1)
+E02 = FTA.Event(fr=0.11e-09, mttr=20, t=1)
+E03 = FTA.Event(fr=0.91e-09, mttr=1, t=1)
+E04 = FTA.Event(fr=0.55e-09, mttr=2, t=1)
+E05 = FTA.Event(fr=0.83, mttr=56, t=1)
+E06 = FTA.Event(fr=0.77, mttr=11, t=1)
+E07 = FTA.Event(fr=0.12, mttr=96, t=1)
+E08 = FTA.Event(fr=0.67, mttr=67, t=1)
+E09 = FTA.Event(fr=0.23e-09, mttr=12, t=87600)
+E10 = FTA.Event(fr=0.11e-09, mttr=20, t=87600)
+E11 = FTA.Event(fr=0.91e-09, mttr=1, t=87600)
+E12 = FTA.Event(fr=0.55e-09, mttr=2, t=87600)
+E13 = FTA.Event(fr=0.83, mttr=56, t=87600)
+E14 = FTA.Event(fr=0.77, mttr=11, t=87600)
+E15 = FTA.Event(fr=0.12, mttr=96, t=87600)
+E16 = FTA.Event(fr=0.67, mttr=67, t=87600)
 
 # test OR
 w, q = FTA.calc_OR(E01, E02, E03, E04)
-print(format(q, '.8e'))
 assert format(w, '.8e') == "1.80000000e-09"
 assert format(q, '.8e') == "1.33601863e-09" # "1.33601866e-09"
 w, q = FTA.calc_OR(E05, E06, E07, E08)
